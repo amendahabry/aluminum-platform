@@ -1,0 +1,23 @@
+<div class="layout" [attr.dir]="currentLang === 'ar' || currentLang === 'he' ? 'rtl' : 'ltr'">
+  <aside class="sidebar">
+    <h1 class="brand">{{ 'app.title' | translate }}</h1>
+    <nav>
+      <a routerLink="/inventory/materials" routerLinkActive="active">{{ 'nav.materials' | translate }}</a>
+      <a routerLink="/orders/rfqs" routerLinkActive="active">{{ 'nav.rfqs' | translate }}</a>
+      <a routerLink="/orders/quotes" routerLinkActive="active">{{ 'nav.quotes' | translate }}</a>
+      <a routerLink="/orders/sales-orders" routerLinkActive="active">{{ 'nav.salesOrders' | translate }}</a>
+    </nav>
+    <div class="sidebar-footer">
+      <label>{{ 'app.fullName' | translate }}: {{ user()?.full_name || user()?.email }}</label>
+      <div class="lang-switcher">
+        <button (click)="setLang('en')" [class.active]="currentLang === 'en'">EN</button>
+        <button (click)="setLang('he')" [class.active]="currentLang === 'he'">HE</button>
+        <button (click)="setLang('ar')" [class.active]="currentLang === 'ar'">AR</button>
+      </div>
+      <button class="btn-logout" (click)="logout()">{{ 'app.logout' | translate }}</button>
+    </div>
+  </aside>
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

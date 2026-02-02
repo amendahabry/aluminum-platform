@@ -1,0 +1,21 @@
+<div class="register-page">
+  <div class="card">
+    <h1>{{ 'auth.registerTenantTitle' | translate }}</h1>
+    <form (ngSubmit)="submit()">
+      <label>{{ 'auth.tenantName' | translate }}</label>
+      <input type="text" [(ngModel)]="name" name="name" required />
+      <label>{{ 'auth.tenantSlug' | translate }}</label>
+      <input type="text" [(ngModel)]="slug" name="slug" required placeholder="acme" />
+      <label>{{ 'auth.adminEmail' | translate }}</label>
+      <input type="email" [(ngModel)]="adminEmail" name="adminEmail" required />
+      <label>{{ 'auth.adminPassword' | translate }}</label>
+      <input type="password" [(ngModel)]="adminPassword" name="adminPassword" required />
+      <label>{{ 'app.fullName' | translate }}</label>
+      <input type="text" [(ngModel)]="adminFullName" name="adminFullName" />
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <p class="success" *ngIf="success">{{ success | translate }}</p>
+      <button type="submit" [disabled]="loading">{{ loading ? ('app.loading' | translate) : ('app.submit' | translate) }}</button>
+    </form>
+    <a routerLink="/login">{{ 'app.login' | translate }}</a>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+{
+  "app": {
+    "title": "מערכת ניהול אלומיניום",
+    "login": "התחברות",
+    "logout": "התנתקות",
+    "registerTenant": "רישום ארגון",
+    "email": "אימייל",
+    "password": "סיסמה",
+    "tenantSlug": "מזהה ארגון",
+    "fullName": "שם מלא",
+    "submit": "שליחה",
+    "cancel": "ביטול",
+    "save": "שמירה",
+    "delete": "מחיקה",
+    "edit": "עריכה",
+    "create": "יצירה",
+    "back": "חזרה",
+    "actions": "פעולות",
+    "search": "חיפוש",
+    "loading": "טוען..."
+  },
+  "nav": {
+    "dashboard": "לוח בקרה",
+    "inventory": "מלאי",
+    "materials": "חומרים",
+    "warehouses": "מחסנים",
+    "stock": "מלאי",
+    "rfqs": "בקשות הצעה",
+    "quotes": "הצעות מחיר",
+    "salesOrders": "הזמנות מכירה",
+    "invoices": "חשבוניות",
+    "users": "משתמשים",
+    "roles": "תפקידים"
+  },
+  "auth": {
+    "loginTitle": "התחברות",
+    "registerTenantTitle": "רישום הארגון שלך",
+    "tenantName": "שם הארגון",
+    "tenantSlug": "מזהה ארגון (לדוגמה acme)",
+    "adminEmail": "אימייל מנהל",
+    "adminPassword": "סיסמת מנהל",
+    "invalidCredentials": "אימייל או סיסמה לא נכונים",
+    "registerSuccess": "הארגון נרשם. אפשר להתחבר כעת."
+  },
+  "inventory": {
+    "materials": "חומרים",
+    "sku": "מק\"ט",
+    "name": "שם",
+    "description": "תיאור",
+    "unit": "יחידה",
+    "weightKg": "משקל (ק\"ג)",
+    "createMaterial": "הוספת חומר",
+    "editMaterial": "עריכת חומר"
+  },
+  "orders": {
+    "rfq": "בקשת הצעת מחיר",
+    "quote": "הצעת מחיר",
+    "reference": "מזהה",
+    "status": "סטטוס",
+    "approve": "אישור",
+    "reject": "דחייה",
+    "createRfq": "בקשת הצעה",
+    "createQuote": "הצעת מחיר",
+    "salesOrder": "הזמנת מכירה",
+    "lines": "שורות"
+  },
+  "errors": {
+    "required": "שדה חובה",
+    "minLength": "אורך מינימלי {{min}}",
+    "generic": "אירעה שגיאה. נסה שוב."
+  }
+}

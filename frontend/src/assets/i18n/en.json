@@ -1,0 +1,72 @@
+{
+  "app": {
+    "title": "Aluminum Management System",
+    "login": "Login",
+    "logout": "Logout",
+    "registerTenant": "Register tenant",
+    "email": "Email",
+    "password": "Password",
+    "tenantSlug": "Tenant slug",
+    "fullName": "Full name",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "back": "Back",
+    "actions": "Actions",
+    "search": "Search",
+    "loading": "Loading..."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "inventory": "Inventory",
+    "materials": "Materials",
+    "warehouses": "Warehouses",
+    "stock": "Stock",
+    "rfqs": "RFQs",
+    "quotes": "Quotes",
+    "salesOrders": "Sales Orders",
+    "invoices": "Invoices",
+    "users": "Users",
+    "roles": "Roles"
+  },
+  "auth": {
+    "loginTitle": "Sign in",
+    "registerTenantTitle": "Register your organization",
+    "tenantName": "Organization name",
+    "tenantSlug": "Tenant slug (e.g. acme)",
+    "adminEmail": "Admin email",
+    "adminPassword": "Admin password",
+    "invalidCredentials": "Invalid email or password",
+    "registerSuccess": "Tenant registered. You can sign in now."
+  },
+  "inventory": {
+    "materials": "Materials",
+    "sku": "SKU",
+    "name": "Name",
+    "description": "Description",
+    "unit": "Unit",
+    "weightKg": "Weight (kg)",
+    "createMaterial": "Create material",
+    "editMaterial": "Edit material"
+  },
+  "orders": {
+    "rfq": "Request for Quote",
+    "quote": "Quote",
+    "reference": "Reference",
+    "status": "Status",
+    "approve": "Approve",
+    "reject": "Reject",
+    "createRfq": "Create RFQ",
+    "createQuote": "Create quote",
+    "salesOrder": "Sales order",
+    "lines": "Lines"
+  },
+  "errors": {
+    "required": "This field is required",
+    "minLength": "Minimum length is {{min}}",
+    "generic": "An error occurred. Please try again."
+  }
+}

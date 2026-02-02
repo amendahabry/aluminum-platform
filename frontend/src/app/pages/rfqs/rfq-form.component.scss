@@ -1,0 +1,7 @@
+.page-header { display: flex; justify-content: space-between; margin-bottom: 1rem; }
+form { max-width: 400px; display: flex; flex-direction: column; gap: 0.75rem; }
+label { font-weight: 500; }
+input { padding: 0.5rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; }
+.error { color: #dc2626; }
+.hint { font-size: 0.875rem; color: #64748b; }
+button { padding: 0.5rem 1rem; background: #0ea5e9; color: #fff; border: none; border-radius: 6px; cursor: pointer; width: fit-content; }

@@ -1,0 +1,23 @@
+<div class="page-header">
+  <h1>{{ 'orders.rfq' | translate }}</h1>
+  <a routerLink="/orders/rfqs/new" class="btn-primary">{{ 'orders.createRfq' | translate }}</a>
+</div>
+<p class="error" *ngIf="error">{{ error | translate }}</p>
+<div *ngIf="loading">{{ 'app.loading' | translate }}</div>
+<table *ngIf="!loading && items.length" class="table">
+  <thead>
+    <tr>
+      <th>{{ 'orders.reference' | translate }}</th>
+      <th>{{ 'orders.status' | translate }}</th>
+      <th>{{ 'app.actions' | translate }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let r of items">
+      <td>{{ r.reference || r.id }}</td>
+      <td>{{ r.status }}</td>
+      <td><a [routerLink]="['/orders/rfqs', r.id, 'edit']">{{ 'app.edit' | translate }}</a></td>
+    </tr>
+  </tbody>
+</table>
+<p *ngIf="!loading && !items.length">No RFQs</p>

@@ -1,0 +1,14 @@
+<div class="page-header">
+  <h1>{{ 'orders.createRfq' | translate }}</h1>
+  <a routerLink="/orders/rfqs">{{ 'app.back' | translate }}</a>
+</div>
+<form (ngSubmit)="submit()">
+  <label>{{ 'orders.reference' | translate }}</label>
+  <input type="text" [(ngModel)]="reference" name="reference" />
+  <label>{{ 'orders.lines' | translate }}</label>
+  <p class="hint">Add lines in a future iteration.</p>
+  <label>Notes</label>
+  <input type="text" [(ngModel)]="notes" name="notes" />
+  <p class="error" *ngIf="error">{{ error | translate }}</p>
+  <button type="submit" [disabled]="loading">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+</form>

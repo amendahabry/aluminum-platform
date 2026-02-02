@@ -1,0 +1,72 @@
+{
+  "app": {
+    "title": "نظام إدارة الألمنيوم",
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "registerTenant": "تسجيل المنظمة",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "tenantSlug": "معرف المنظمة",
+    "fullName": "الاسم الكامل",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "create": "إنشاء",
+    "back": "رجوع",
+    "actions": "إجراءات",
+    "search": "بحث",
+    "loading": "جاري التحميل..."
+  },
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "inventory": "المخزون",
+    "materials": "المواد",
+    "warehouses": "المستودعات",
+    "stock": "المخزون",
+    "rfqs": "طلبات عروض الأسعار",
+    "quotes": "عروض الأسعار",
+    "salesOrders": "أوامر البيع",
+    "invoices": "الفواتير",
+    "users": "المستخدمون",
+    "roles": "الأدوار"
+  },
+  "auth": {
+    "loginTitle": "تسجيل الدخول",
+    "registerTenantTitle": "تسجيل منظمتك",
+    "tenantName": "اسم المنظمة",
+    "tenantSlug": "معرف المنظمة (مثال acme)",
+    "adminEmail": "بريد المسؤول",
+    "adminPassword": "كلمة مرور المسؤول",
+    "invalidCredentials": "البريد أو كلمة المرور غير صحيحة",
+    "registerSuccess": "تم تسجيل المنظمة. يمكنك تسجيل الدخول الآن."
+  },
+  "inventory": {
+    "materials": "المواد",
+    "sku": "رمز المنتج",
+    "name": "الاسم",
+    "description": "الوصف",
+    "unit": "الوحدة",
+    "weightKg": "الوزن (كغ)",
+    "createMaterial": "إضافة مادة",
+    "editMaterial": "تعديل مادة"
+  },
+  "orders": {
+    "rfq": "طلب عرض سعر",
+    "quote": "عرض السعر",
+    "reference": "المرجع",
+    "status": "الحالة",
+    "approve": "موافقة",
+    "reject": "رفض",
+    "createRfq": "طلب عرض",
+    "createQuote": "عرض سعر",
+    "salesOrder": "أمر البيع",
+    "lines": "البنود"
+  },
+  "errors": {
+    "required": "هذا الحقل مطلوب",
+    "minLength": "الحد الأدنى للطول {{min}}",
+    "generic": "حدث خطأ. يرجى المحاولة مرة أخرى."
+  }
+}

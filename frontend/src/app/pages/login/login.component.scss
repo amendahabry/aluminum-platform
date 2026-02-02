@@ -1,0 +1,10 @@
+.login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #f1f5f9; }
+.card { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); width: 100%; max-width: 400px; }
+.card h1 { margin: 0 0 1.5rem 0; font-size: 1.5rem; }
+.card form { display: flex; flex-direction: column; gap: 0.75rem; }
+.card label { font-size: 0.875rem; font-weight: 500; }
+.card input { padding: 0.5rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; }
+.card .error { color: #dc2626; font-size: 0.875rem; }
+.card button { padding: 0.5rem 1rem; background: #0ea5e9; color: #fff; border: none; border-radius: 6px; cursor: pointer; margin-top: 0.5rem; }
+.card button:disabled { opacity: 0.6; cursor: not-allowed; }
+.card a { display: block; margin-top: 1rem; color: #0ea5e9; }
