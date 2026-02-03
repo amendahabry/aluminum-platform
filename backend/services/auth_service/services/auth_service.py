@@ -51,6 +51,8 @@ def register_tenant(db: Session, body: RegisterTenantRequest) -> tuple[Tenant, U
     for code in DEFAULT_ROLE_PERMISSIONS.get("admin", ["admin:*"]):
         pid = perm_by_code.get(code)
         if pid:
+            print("admin_role_id: ",admin_role_id)
+            print("pid: ",pid)
             db.execute(insert(role_permissions).values(role_id=admin_role_id, permission_id=pid))
 
     user_id = str(uuid.uuid4())

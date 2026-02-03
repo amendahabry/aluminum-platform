@@ -1,5 +1,7 @@
 """AI endpoints: cut-optimize, quote-assistant, OCR invoice, NLQ (stubs)."""
 from typing import Annotated, Any
+
+from pydantic import BaseModel
 from fastapi import APIRouter, Depends, UploadFile, File
 
 from shared.auth.deps import require_permission

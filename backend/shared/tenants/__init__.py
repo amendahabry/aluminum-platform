@@ -1,3 +1,3 @@
-from .middleware import tenant_context_middleware, set_tenant_context
+from .middleware import TenantContextMiddleware, set_tenant_context
 
-__all__ = ["tenant_context_middleware", "set_tenant_context"]
+__all__ = ["TenantContextMiddleware", "set_tenant_context"]
