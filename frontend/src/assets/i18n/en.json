@@ -50,7 +50,8 @@
     "unit": "Unit",
     "weightKg": "Weight (kg)",
     "createMaterial": "Create material",
-    "editMaterial": "Edit material"
+    "editMaterial": "Edit material",
+    "noMaterials": "No materials yet. Create your first one."
   },
   "orders": {
     "rfq": "Request for Quote",

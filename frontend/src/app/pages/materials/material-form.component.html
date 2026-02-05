@@ -1,18 +1,22 @@
-<div class="page-header">
-  <h1>{{ id ? ('inventory.editMaterial' | translate) : ('inventory.createMaterial' | translate) }}</h1>
-  <a routerLink="/inventory/materials">{{ 'app.back' | translate }}</a>
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ id ? ('inventory.editMaterial' | translate) : ('inventory.createMaterial' | translate) }}</h1>
+    <a routerLink="/inventory/materials" class="btn-back">{{ 'app.back' | translate }}</a>
+  </div>
+  <div class="form-card">
+    <form (ngSubmit)="submit()">
+      <label>{{ 'inventory.sku' | translate }}</label>
+      <input type="text" [(ngModel)]="sku" name="sku" [readonly]="!!id" placeholder="e.g. AL-001" />
+      <label>{{ 'inventory.name' | translate }}</label>
+      <input type="text" [(ngModel)]="name" name="name" required placeholder="Material name" />
+      <label>{{ 'inventory.description' | translate }}</label>
+      <input type="text" [(ngModel)]="description" name="description" placeholder="Optional description" />
+      <label>{{ 'inventory.unit' | translate }}</label>
+      <input type="text" [(ngModel)]="unit" name="unit" placeholder="e.g. kg, m" />
+      <label>{{ 'inventory.weightKg' | translate }}</label>
+      <input type="number" [(ngModel)]="weightKg" name="weightKg" step="0.0001" placeholder="0" />
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+    </form>
+  </div>
 </div>
-<form (ngSubmit)="submit()">
-  <label>{{ 'inventory.sku' | translate }}</label>
-  <input type="text" [(ngModel)]="sku" name="sku" [readonly]="!!id" />
-  <label>{{ 'inventory.name' | translate }}</label>
-  <input type="text" [(ngModel)]="name" name="name" required />
-  <label>{{ 'inventory.description' | translate }}</label>
-  <input type="text" [(ngModel)]="description" name="description" />
-  <label>{{ 'inventory.unit' | translate }}</label>
-  <input type="text" [(ngModel)]="unit" name="unit" />
-  <label>{{ 'inventory.weightKg' | translate }}</label>
-  <input type="number" [(ngModel)]="weightKg" name="weightKg" step="0.0001" />
-  <p class="error" *ngIf="error">{{ error | translate }}</p>
-  <button type="submit" [disabled]="loading">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
-</form>
