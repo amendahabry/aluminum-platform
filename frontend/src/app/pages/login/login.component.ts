@@ -29,12 +29,18 @@ export class LoginComponent {
       password: this.password,
       tenant_slug: this.tenantSlug || undefined
     }).subscribe({
-      next: () => this.router.navigate(['/']),
+      next: (res) => {
+        console.log('LOGIN RESPONSE', res);
+        this.router.navigate(['/']);
+      },
       error: (err) => {
         this.error = err.error?.detail || 'auth.invalidCredentials';
         this.loading = false;
       },
-      complete: () => this.loading = false
+      complete: () => {
+        this.loading = false;
+        this.router.navigate(['/']);
+      }
     });
   }
 }

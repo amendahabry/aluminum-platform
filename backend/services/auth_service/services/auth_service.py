@@ -47,12 +47,11 @@ def register_tenant(db: Session, body: RegisterTenantRequest) -> tuple[Tenant, U
         perm_id = str(uuid.uuid4())
         db.add(Permission(id=perm_id, tenant_id=tenant_id, code=code, name=code))
         perm_by_code[code] = perm_id
+    db.flush()  # Ensure permissions exist in DB before role_permissions FK insert
     # Link admin role to all admin permissions
     for code in DEFAULT_ROLE_PERMISSIONS.get("admin", ["admin:*"]):
         pid = perm_by_code.get(code)
         if pid:
-            print("admin_role_id: ",admin_role_id)
-            print("pid: ",pid)
             db.execute(insert(role_permissions).values(role_id=admin_role_id, permission_id=pid))
 
     user_id = str(uuid.uuid4())
@@ -66,6 +65,7 @@ def register_tenant(db: Session, body: RegisterTenantRequest) -> tuple[Tenant, U
         is_superuser=True,
     )
     db.add(user)
+    db.flush()  # Ensure user row exists before inserting user_roles (FK to users.id)
 
     user_role = UserRole(
         id=str(uuid.uuid4()),

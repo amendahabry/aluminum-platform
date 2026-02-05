@@ -3,8 +3,14 @@ import { authGuard } from './core/guards/auth.guard';
 import { roleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
-  { path: 'login', loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent) },
-  { path: 'register-tenant', loadComponent: () => import('./pages/register-tenant/register-tenant.component').then(m => m.RegisterTenantComponent) },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: 'register-tenant',
+    loadComponent: () => import('./pages/register-tenant/register-tenant.component').then(m => m.RegisterTenantComponent)
+  },
   {
     path: '',
     loadComponent: () => import('./layout/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
@@ -21,5 +27,5 @@ export const routes: Routes = [
       { path: 'orders/sales-orders', loadComponent: () => import('./pages/sales-orders/sales-orders-list.component').then(m => m.SalesOrdersListComponent), canActivate: [roleGuard('orders:sales:read')] },
     ]
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'login' }
 ];

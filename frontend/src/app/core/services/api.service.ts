@@ -28,6 +28,3 @@ export class ApiService {
     return this.http.delete<void>(`${API_BASE}${path}`);
   }
 }
-
-// Fix: Observable import
-import { Observable } from 'rxjs';

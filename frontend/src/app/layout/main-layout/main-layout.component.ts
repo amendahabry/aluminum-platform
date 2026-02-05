@@ -14,12 +14,15 @@ import { FormsModule } from '@angular/forms';
 })
 export class MainLayoutComponent implements OnInit {
   currentLang = 'en';
-  user = this.auth.currentUser;
+  user: any;
 
   constructor(
     public auth: AuthService,
     private translate: TranslateService
-  ) {}
+  ) {
+    // Now that auth is initialized, we can safely read currentUser
+    this.user = this.auth.currentUser;
+  }
 
   ngOnInit(): void {
     this.currentLang = this.translate.currentLang || 'en';
