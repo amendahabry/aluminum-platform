@@ -1,0 +1,35 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ 'inventory.scrap' | translate }}</h1>
+  </div>
+  <p class="error" *ngIf="error">{{ error | translate }}</p>
+  <div class="loading-state" *ngIf="loading">
+    <span class="spinner"></span>
+    <span>{{ 'app.loading' | translate }}</span>
+  </div>
+  <div class="table-card" *ngIf="!loading && items.length">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{ 'inventory.material' | translate }}</th>
+          <th>{{ 'inventory.warehouse' | translate }}</th>
+          <th>{{ 'inventory.weightKg' | translate }}</th>
+          <th>{{ 'inventory.reason' | translate }}</th>
+          <th>{{ 'inventory.reportedAt' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of items">
+          <td>{{ s.material_id || '-' }}</td>
+          <td>{{ s.warehouse_id || '-' }}</td>
+          <td>{{ s.weight_kg }}</td>
+          <td>{{ s.reason || '-' }}</td>
+          <td>{{ s.reported_at | date: 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="empty-state" *ngIf="!loading && !items.length">
+    <p>{{ 'inventory.noScrap' | translate }}</p>
+  </div>
+</div>

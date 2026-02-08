@@ -3,12 +3,16 @@ import uuid
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status, Query
-from sqlalchemy.orm import Session
 
 from shared.auth.deps import require_permission
 from ..deps import DbSession, TenantUser
-from ..models import SalesOrder, SalesOrderLine
-from ..schemas.sales_order import SalesOrderCreate, SalesOrderUpdate, SalesOrderResponse, SalesOrderLineResponse
+from ..models import SalesOrder, SalesOrderLine, Quote
+from ..schemas.sales_order import (
+    SalesOrderCreate,
+    SalesOrderUpdate,
+    SalesOrderResponse,
+    SalesOrderLineResponse,
+)
 
 router = APIRouter()
 
@@ -22,9 +26,18 @@ def _order_to_response(order: SalesOrder, lines: list[SalesOrderLine]) -> SalesO
         status=order.status,
         customer_id=order.customer_id,
         order_date=order.order_date,
+        source_quote_id=order.source_quote_id,
         notes=order.notes,
         lines=[SalesOrderLineResponse.model_validate(l) for l in lines],
     )
+
+
+def _validate_quote(db: DbSession, tid: str, quote_id: str) -> None:
+    quote = db.query(Quote).filter(Quote.id == quote_id, Quote.tenant_id == tid).first()
+    if not quote:
+        raise HTTPException(status_code=404, detail="Quote not found")
+    if quote.status != "approved":
+        raise HTTPException(status_code=400, detail="Quote must be approved before conversion")
 
 
 @router.get("", response_model=list[SalesOrderResponse])
@@ -68,6 +81,9 @@ def create_sales_order(
 ):
     tid = tenant_user["tenant_id"]
     order_id = str(uuid.uuid4())
+    source_quote_id = body.source_quote_id or body.quote_id
+    if source_quote_id:
+        _validate_quote(db, tid, source_quote_id)
     order = SalesOrder(
         id=order_id,
         tenant_id=tid,
@@ -76,9 +92,24 @@ def create_sales_order(
         status="draft",
         customer_id=body.customer_id,
         order_date=body.order_date,
+        source_quote_id=source_quote_id,
         notes=body.notes,
     )
     db.add(order)
+    for line in body.lines:
+        line_id = str(uuid.uuid4())
+        total = (line.quantity * line.unit_price) if line.unit_price else None
+        db.add(SalesOrderLine(
+            id=line_id,
+            tenant_id=tid,
+            sales_order_id=order_id,
+            material_id=line.material_id,
+            description=line.description,
+            quantity=line.quantity,
+            unit=line.unit,
+            unit_price=line.unit_price,
+            total=total or line.total,
+        ))
     db.commit()
     db.refresh(order)
     lines = db.query(SalesOrderLine).filter(SalesOrderLine.tenant_id == tid, SalesOrderLine.sales_order_id == order_id).all()
@@ -105,6 +136,9 @@ def update_sales_order(
         order.customer_id = body.customer_id
     if body.order_date is not None:
         order.order_date = body.order_date
+    if body.source_quote_id is not None:
+        _validate_quote(db, tid, body.source_quote_id)
+        order.source_quote_id = body.source_quote_id
     if body.notes is not None:
         order.notes = body.notes
     db.commit()

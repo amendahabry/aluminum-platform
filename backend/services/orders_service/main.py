@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from shared.logging_utils import setup_logging, bind_request_id, get_logger
 from shared.tenants.middleware import TenantContextMiddleware
-from .routers import rfqs, quotes, sales_orders, invoices
+from .routers import rfqs, quotes, sales_orders, invoices, customers, price_lists, delivery_notes, purchase_orders, reports, quotes_conversion, invoices_pdf
 
 SERVICE_NAME = "orders_service"
 setup_logging(SERVICE_NAME, os.getenv("LOG_LEVEL", "INFO"))
@@ -20,8 +20,13 @@ def create_app() -> FastAPI:
         openapi_tags=[
             {"name": "rfqs", "description": "Request for Quote"},
             {"name": "quotes", "description": "Quotes and approval"},
+            {"name": "customers", "description": "Customers and payment terms"},
+            {"name": "price-lists", "description": "Customer price lists"},
             {"name": "sales-orders", "description": "Sales orders"},
+            {"name": "delivery-notes", "description": "Delivery notes"},
             {"name": "invoices", "description": "Invoices"},
+            {"name": "purchase-orders", "description": "Supplier purchase orders"},
+            {"name": "reports", "description": "Orders reports"},
         ],
     )
     app.add_middleware(
@@ -58,8 +63,15 @@ def create_app() -> FastAPI:
 
     app.include_router(rfqs.router, prefix="/rfqs", tags=["rfqs"])
     app.include_router(quotes.router, prefix="/quotes", tags=["quotes"])
+    app.include_router(quotes_conversion.router, prefix="/quotes", tags=["quotes"])
     app.include_router(sales_orders.router, prefix="/sales-orders", tags=["sales-orders"])
+    app.include_router(customers.router, prefix="/customers", tags=["customers"])
+    app.include_router(price_lists.router, prefix="/price-lists", tags=["price-lists"])
+    app.include_router(delivery_notes.router, prefix="/delivery-notes", tags=["delivery-notes"])
     app.include_router(invoices.router, prefix="/invoices", tags=["invoices"])
+    app.include_router(invoices_pdf.router, prefix="/invoices", tags=["invoices"])
+    app.include_router(purchase_orders.router, prefix="/purchase-orders", tags=["purchase-orders"])
+    app.include_router(reports.router, prefix="/reports", tags=["reports"])
 
     @app.get("/health")
     def health():

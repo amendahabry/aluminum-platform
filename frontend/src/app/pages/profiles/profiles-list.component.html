@@ -1,0 +1,37 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ 'inventory.profiles' | translate }}</h1>
+  </div>
+  <p class="error" *ngIf="error">{{ error | translate }}</p>
+  <div class="loading-state" *ngIf="loading">
+    <span class="spinner"></span>
+    <span>{{ 'app.loading' | translate }}</span>
+  </div>
+  <div class="table-card" *ngIf="!loading && items.length">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{ 'inventory.series' | translate }}</th>
+          <th>{{ 'inventory.alloy' | translate }}</th>
+          <th>{{ 'inventory.temper' | translate }}</th>
+          <th>{{ 'inventory.weightPerMeter' | translate }}</th>
+          <th>{{ 'inventory.costPerMeter' | translate }}</th>
+          <th>{{ 'app.status' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of items">
+          <td>{{ p.series }}</td>
+          <td>{{ p.alloy }}</td>
+          <td>{{ p.temper || '-' }}</td>
+          <td>{{ p.weight_per_meter }}</td>
+          <td>{{ p.cost_per_meter }}</td>
+          <td><span class="badge" [class.badge-success]="p.is_active">{{ p.is_active ? ('app.active' | translate) : ('app.inactive' | translate) }}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="empty-state" *ngIf="!loading && !items.length">
+    <p>{{ 'inventory.noProfiles' | translate }}</p>
+  </div>
+</div>

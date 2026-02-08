@@ -10,7 +10,7 @@ from fastapi.responses import JSONResponse
 from shared.logging_utils import setup_logging, bind_request_id, get_logger
 from shared.tenants.middleware import TenantContextMiddleware
 from shared.auth.deps import get_current_user, get_optional_user
-from .routers import auth, users, roles, tenants
+from .routers import auth, users, roles, tenants, audit
 
 SERVICE_NAME = "auth_service"
 setup_logging(SERVICE_NAME, os.getenv("LOG_LEVEL", "INFO"))
@@ -35,6 +35,7 @@ def create_app() -> FastAPI:
             {"name": "users", "description": "User CRUD"},
             {"name": "roles", "description": "Roles and permissions"},
             {"name": "tenants", "description": "Tenant management"},
+            {"name": "audit", "description": "Audit logs"},
         ],
     )
 
@@ -79,6 +80,7 @@ def create_app() -> FastAPI:
     app.include_router(users.router, prefix="/users", tags=["users"])
     app.include_router(roles.router, prefix="/roles", tags=["roles"])
     app.include_router(tenants.router, prefix="/tenants", tags=["tenants"])
+    app.include_router(audit.router, prefix="/audit", tags=["audit"])
 
     @app.get("/health", tags=["health"])
     def health():

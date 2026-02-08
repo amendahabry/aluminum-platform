@@ -1,0 +1,35 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ 'sales.customers' | translate }}</h1>
+  </div>
+  <p class="error" *ngIf="error">{{ error | translate }}</p>
+  <div class="loading-state" *ngIf="loading">
+    <span class="spinner"></span>
+    <span>{{ 'app.loading' | translate }}</span>
+  </div>
+  <div class="table-card" *ngIf="!loading && items.length">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{ 'sales.customerName' | translate }}</th>
+          <th>{{ 'sales.email' | translate }}</th>
+          <th>{{ 'sales.paymentTerms' | translate }}</th>
+          <th>{{ 'sales.creditLimit' | translate }}</th>
+          <th>{{ 'app.status' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of items">
+          <td>{{ c.name }}</td>
+          <td>{{ c.email || '-' }}</td>
+          <td>{{ c.payment_terms || '-' }}</td>
+          <td>{{ c.credit_limit || '-' }}</td>
+          <td><span class="badge" [class.badge-success]="c.is_active">{{ c.is_active ? ('app.active' | translate) : ('app.inactive' | translate) }}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="empty-state" *ngIf="!loading && !items.length">
+    <p>{{ 'sales.noCustomers' | translate }}</p>
+  </div>
+</div>

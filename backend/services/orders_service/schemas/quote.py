@@ -55,6 +55,7 @@ class QuoteResponse(BaseModel):
     rfq_id: Optional[str]
     reference: Optional[str]
     status: str
+    version: int
     customer_id: Optional[str]
     valid_until: Optional[datetime]
     notes: Optional[str]

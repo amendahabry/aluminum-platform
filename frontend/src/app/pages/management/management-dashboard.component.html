@@ -1,0 +1,28 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ 'management.dashboard' | translate }}</h1>
+  </div>
+  <p class="error" *ngIf="error">{{ error | translate }}</p>
+  <div class="loading-state" *ngIf="loading">
+    <span class="spinner"></span>
+    <span>{{ 'app.loading' | translate }}</span>
+  </div>
+  <div class="kpi-grid" *ngIf="!loading && data">
+    <div class="kpi-card">
+      <h3>{{ 'management.profit' | translate }}</h3>
+      <p>{{ data.profit }}</p>
+    </div>
+    <div class="kpi-card">
+      <h3>{{ 'management.scrapPct' | translate }}</h3>
+      <p>{{ data.scrap_pct }}%</p>
+    </div>
+    <div class="kpi-card">
+      <h3>{{ 'management.utilization' | translate }}</h3>
+      <p>{{ data.utilization }}%</p>
+    </div>
+    <div class="kpi-card">
+      <h3>{{ 'management.workOrders' | translate }}</h3>
+      <p>{{ data.work_orders }}</p>
+    </div>
+  </div>
+</div>

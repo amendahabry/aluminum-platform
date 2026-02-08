@@ -20,6 +20,7 @@ ORDERS_SERVICE_URL = os.getenv("ORDERS_SERVICE_URL", "http://orders_service:8002
 PRODUCTION_SERVICE_URL = os.getenv("PRODUCTION_SERVICE_URL", "http://production_service:8003")
 AI_SERVICE_URL = os.getenv("AI_SERVICE_URL", "http://ai_service:8004")
 NOTIFICATION_SERVICE_URL = os.getenv("NOTIFICATION_SERVICE_URL", "http://notification_service:8005")
+MANAGEMENT_SERVICE_URL = os.getenv("MANAGEMENT_SERVICE_URL", "http://management_service:8006")
 
 
 async def proxy_request(service_url: str, path: str, request: StarletteRequest) -> JSONResponse:
@@ -102,6 +103,10 @@ def create_app() -> FastAPI:
     async def roles_proxy(request: Request, path: str):
         return await proxy_request(AUTH_SERVICE_URL, f"/roles/{path}", request)
 
+    @app.api_route("/audit/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def audit_proxy(request: Request, path: str):
+        return await proxy_request(AUTH_SERVICE_URL, f"/audit/{path}", request)
+
     @app.api_route("/tenants/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
     async def tenants_proxy(request: Request, path: str):
         return await proxy_request(AUTH_SERVICE_URL, f"/tenants/{path}", request)
@@ -114,6 +119,22 @@ def create_app() -> FastAPI:
     @app.api_route("/warehouses/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
     async def warehouses_proxy(request: Request, path: str):
         return await proxy_request(INVENTORY_SERVICE_URL, f"/warehouses/{path}", request)
+
+    @app.api_route("/profiles/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def profiles_proxy(request: Request, path: str):
+        return await proxy_request(INVENTORY_SERVICE_URL, f"/profiles/{path}", request)
+
+    @app.api_route("/accessories/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def accessories_proxy(request: Request, path: str):
+        return await proxy_request(INVENTORY_SERVICE_URL, f"/accessories/{path}", request)
+
+    @app.api_route("/scrap/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def scrap_proxy(request: Request, path: str):
+        return await proxy_request(INVENTORY_SERVICE_URL, f"/scrap/{path}", request)
+
+    @app.api_route("/inventory-reports/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def inventory_reports_proxy(request: Request, path: str):
+        return await proxy_request(INVENTORY_SERVICE_URL, f"/reports/{path}", request)
 
     @app.api_route("/stock/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
     async def stock_proxy(request: Request, path: str):
@@ -128,13 +149,37 @@ def create_app() -> FastAPI:
     async def quotes_proxy(request: Request, path: str):
         return await proxy_request(ORDERS_SERVICE_URL, f"/quotes/{path}", request)
 
+    @app.api_route("/customers/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def customers_proxy(request: Request, path: str):
+        return await proxy_request(ORDERS_SERVICE_URL, f"/customers/{path}", request)
+
+    @app.api_route("/price-lists/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def price_lists_proxy(request: Request, path: str):
+        return await proxy_request(ORDERS_SERVICE_URL, f"/price-lists/{path}", request)
+
     @app.api_route("/sales-orders/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
     async def sales_orders_proxy(request: Request, path: str):
         return await proxy_request(ORDERS_SERVICE_URL, f"/sales-orders/{path}", request)
 
+    @app.api_route("/delivery-notes/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def delivery_notes_proxy(request: Request, path: str):
+        return await proxy_request(ORDERS_SERVICE_URL, f"/delivery-notes/{path}", request)
+
     @app.api_route("/invoices/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
     async def invoices_proxy(request: Request, path: str):
         return await proxy_request(ORDERS_SERVICE_URL, f"/invoices/{path}", request)
+
+    @app.api_route("/purchase-orders/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def purchase_orders_proxy(request: Request, path: str):
+        return await proxy_request(ORDERS_SERVICE_URL, f"/purchase-orders/{path}", request)
+
+    @app.api_route("/reports/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def reports_proxy(request: Request, path: str):
+        return await proxy_request(ORDERS_SERVICE_URL, f"/reports/{path}", request)
+
+    @app.api_route("/production/reports/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def prod_reports_proxy(request: Request, path: str):
+        return await proxy_request(PRODUCTION_SERVICE_URL, f"/reports/{path}", request)
 
     # Production
     @app.api_route("/boms/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
@@ -149,6 +194,15 @@ def create_app() -> FastAPI:
     async def work_orders_proxy(request: Request, path: str):
         return await proxy_request(PRODUCTION_SERVICE_URL, f"/work-orders/{path}", request)
 
+    @app.api_route("/machines/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def machines_proxy(request: Request, path: str):
+        return await proxy_request(PRODUCTION_SERVICE_URL, f"/machines/{path}", request)
+
+    @app.api_route("/time-entries/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def time_entries_proxy(request: Request, path: str):
+        return await proxy_request(PRODUCTION_SERVICE_URL, f"/time-entries/{path}", request)
+
+
     # AI
     @app.api_route("/ai/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
     async def ai_proxy(request: Request, path: str):
@@ -158,6 +212,15 @@ def create_app() -> FastAPI:
     @app.api_route("/notify/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
     async def notify_proxy(request: Request, path: str):
         return await proxy_request(NOTIFICATION_SERVICE_URL, f"/notify/{path}", request)
+
+    # Management
+    @app.api_route("/dashboards/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def dashboards_proxy(request: Request, path: str):
+        return await proxy_request(MANAGEMENT_SERVICE_URL, f"/dashboards/{path}", request)
+
+    @app.api_route("/management-reports/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    async def management_reports_proxy(request: Request, path: str):
+        return await proxy_request(MANAGEMENT_SERVICE_URL, f"/reports/{path}", request)
 
     # Catch-all for /auth (no path)
     @app.api_route("/auth", methods=["GET", "POST"])

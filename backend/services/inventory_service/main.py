@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from shared.logging_utils import setup_logging, bind_request_id, get_logger
 from shared.tenants.middleware import TenantContextMiddleware
-from .routers import materials, warehouses, stock
+from .routers import materials, warehouses, stock, profiles, accessories, scrap, reports
 
 SERVICE_NAME = "inventory_service"
 setup_logging(SERVICE_NAME, os.getenv("LOG_LEVEL", "INFO"))
@@ -19,6 +19,10 @@ def create_app() -> FastAPI:
         version="1.0.0",
         openapi_tags=[
             {"name": "materials", "description": "Materials/SKUs"},
+            {"name": "profiles", "description": "Aluminum profiles catalog"},
+            {"name": "accessories", "description": "Accessories and hardware"},
+            {"name": "scrap", "description": "Scrap and waste"},
+            {"name": "reports", "description": "Inventory reports"},
             {"name": "warehouses", "description": "Warehouses"},
             {"name": "stock", "description": "Stock and movements"},
         ],
@@ -56,6 +60,10 @@ def create_app() -> FastAPI:
     app.add_middleware(TenantContextMiddleware)
 
     app.include_router(materials.router, prefix="/materials", tags=["materials"])
+    app.include_router(profiles.router, prefix="/profiles", tags=["profiles"])
+    app.include_router(accessories.router, prefix="/accessories", tags=["accessories"])
+    app.include_router(scrap.router, prefix="/scrap", tags=["scrap"])
+    app.include_router(reports.router, prefix="/reports", tags=["reports"])
     app.include_router(warehouses.router, prefix="/warehouses", tags=["warehouses"])
     app.include_router(stock.router, prefix="/stock", tags=["stock"])
 

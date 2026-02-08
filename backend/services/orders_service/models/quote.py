@@ -1,5 +1,4 @@
-from sqlalchemy import Column, String, Numeric, DateTime, Text
-from datetime import datetime
+from sqlalchemy import Column, String, Numeric, DateTime, Text, Integer
 from shared.db.session import Base
 from shared.db.base import TenantMixin, TimestampMixin
 
@@ -11,6 +10,7 @@ class Quote(Base, TenantMixin, TimestampMixin):
     rfq_id = Column(String(36), nullable=True, index=True)
     reference = Column(String(64), nullable=True, index=True)
     status = Column(String(32), nullable=False, default="draft", index=True)  # draft, sent, approved, rejected
+    version = Column(Integer, nullable=False, default=1)
     customer_id = Column(String(36), nullable=True, index=True)
     valid_until = Column(DateTime, nullable=True)
     notes = Column(Text, nullable=True)

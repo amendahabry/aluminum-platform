@@ -13,3 +13,5 @@ class Material(Base, TenantMixin, TimestampMixin):
     unit = Column(String(32), nullable=False, default="pcs")
     weight_kg = Column(Numeric(12, 4), nullable=True)
     is_active = Column(Boolean, nullable=False, default=True)
+    category = Column(String(64), nullable=True)
+    cost_per_unit = Column(Numeric(12, 4), nullable=True)

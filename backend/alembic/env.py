@@ -21,6 +21,25 @@ config.set_main_option("sqlalchemy.url", database_url)
 from shared.db.session import Base
 from services.auth_service.models import Tenant, User, Role, Permission, UserRole, AuditLog, RefreshToken
 from services.auth_service.models.role import role_permissions
+from services.inventory_service.models import Material, AluminumProfile, Accessory, ScrapRecord, Warehouse, Location, StockLot, StockMovement, Reservation
+from services.orders_service.models import (
+    RFQ,
+    RFQLine,
+    Quote,
+    QuoteLine,
+    SalesOrder,
+    SalesOrderLine,
+    Invoice,
+    Payment,
+    Customer,
+    PriceList,
+    PriceListItem,
+    DeliveryNote,
+    DeliveryNoteLine,
+    PurchaseOrder,
+    PurchaseOrderLine,
+)
+from services.production_service.models import Machine, WorkOrder, WorkOrderTimeEntry
 
 target_metadata = Base.metadata
 

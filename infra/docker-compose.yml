@@ -109,6 +109,19 @@ services:
     ports:
       - "8005:8005"
 
+  management_service:
+    build:
+      context: ..
+      dockerfile: infra/docker/Dockerfile.management
+    environment:
+      DATABASE_URL: postgresql://aluminum:aluminum@postgres:5432/aluminum
+      CORS_ORIGINS: "*"
+    ports:
+      - "8006:8006"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   gateway:
     build:
       context: ..
@@ -120,6 +133,7 @@ services:
       PRODUCTION_SERVICE_URL: http://production_service:8003
       AI_SERVICE_URL: http://ai_service:8004
       NOTIFICATION_SERVICE_URL: http://notification_service:8005
+      MANAGEMENT_SERVICE_URL: http://management_service:8006
       CORS_ORIGINS: "*"
     ports:
       - "8080:8080"
@@ -130,6 +144,7 @@ services:
       - production_service
       - ai_service
       - notification_service
+      - management_service
 
   frontend:
     build:

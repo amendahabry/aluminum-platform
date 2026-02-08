@@ -1,0 +1,33 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ 'logistics.purchaseOrders' | translate }}</h1>
+  </div>
+  <p class="error" *ngIf="error">{{ error | translate }}</p>
+  <div class="loading-state" *ngIf="loading">
+    <span class="spinner"></span>
+    <span>{{ 'app.loading' | translate }}</span>
+  </div>
+  <div class="table-card" *ngIf="!loading && items.length">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{ 'logistics.supplier' | translate }}</th>
+          <th>{{ 'orders.reference' | translate }}</th>
+          <th>{{ 'orders.status' | translate }}</th>
+          <th>{{ 'logistics.orderDate' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let po of items">
+          <td>{{ po.supplier_name }}</td>
+          <td>{{ po.reference || po.id }}</td>
+          <td><span class="badge badge-{{ po.status }}">{{ po.status }}</span></td>
+          <td>{{ po.order_date | date: 'shortDate' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="empty-state" *ngIf="!loading && !items.length">
+    <p>{{ 'logistics.noPurchaseOrders' | translate }}</p>
+  </div>
+</div>

@@ -1,15 +1,11 @@
 """Production service: BOM, cut list, work orders (stubs with realistic responses)."""
 import os
-import uuid
-from typing import Annotated
-
-from fastapi import FastAPI, Request, Depends, HTTPException, status
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 
 from shared.logging_utils import setup_logging, bind_request_id, get_logger
 from shared.tenants.middleware import TenantContextMiddleware
-from .routers import boms, cutlists, work_orders
+from .routers import boms, cutlists, work_orders, machines, time_entries, reports
 
 SERVICE_NAME = "production_service"
 setup_logging(SERVICE_NAME, os.getenv("LOG_LEVEL", "INFO"))
@@ -24,6 +20,9 @@ def create_app() -> FastAPI:
             {"name": "boms", "description": "Bill of Materials"},
             {"name": "cutlists", "description": "Cut list generation (stub)"},
             {"name": "work-orders", "description": "Work orders"},
+            {"name": "machines", "description": "Machines"},
+            {"name": "time", "description": "Time tracking"},
+            {"name": "reports", "description": "Production reports"},
         ],
     )
     app.add_middleware(
@@ -61,6 +60,9 @@ def create_app() -> FastAPI:
     app.include_router(boms.router, prefix="/boms", tags=["boms"])
     app.include_router(cutlists.router, prefix="/cutlists", tags=["cutlists"])
     app.include_router(work_orders.router, prefix="/work-orders", tags=["work-orders"])
+    app.include_router(machines.router, prefix="/machines", tags=["machines"])
+    app.include_router(time_entries.router, prefix="/time-entries", tags=["time"])
+    app.include_router(reports.router, prefix="/reports", tags=["reports"])
 
     @app.get("/health")
     def health():
@@ -68,6 +70,13 @@ def create_app() -> FastAPI:
 
     @app.get("/ready")
     def ready():
+        from sqlalchemy import text
+        from shared.db.session import engine
+        try:
+            with engine.connect() as c:
+                c.execute(text("SELECT 1"))
+        except Exception as e:
+            return {"status": "unhealthy", "error": str(e)}
         return {"status": "ready", "service": SERVICE_NAME}
 
     return app

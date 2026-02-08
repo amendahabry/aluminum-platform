@@ -1,4 +1,4 @@
-"""BOM CRUD (stub: in-memory or minimal DB). For full implementation use shared DB + models."""
+"""BOM CRUD (stub) with tenant isolation."""
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel

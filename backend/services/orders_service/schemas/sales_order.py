@@ -18,12 +18,23 @@ class SalesOrderLineResponse(BaseModel):
         from_attributes = True
 
 
+class SalesOrderLineCreate(BaseModel):
+    material_id: Optional[str] = None
+    description: Optional[str] = None
+    quantity: Decimal = 1
+    unit: str = "pcs"
+    unit_price: Optional[Decimal] = None
+    total: Optional[Decimal] = None
+
+
 class SalesOrderCreate(BaseModel):
     quote_id: Optional[str] = None
     reference: Optional[str] = None
     customer_id: Optional[str] = None
     order_date: Optional[datetime] = None
+    source_quote_id: Optional[str] = None
     notes: Optional[str] = None
+    lines: list[SalesOrderLineCreate] = []
 
 
 class SalesOrderUpdate(BaseModel):
@@ -31,6 +42,7 @@ class SalesOrderUpdate(BaseModel):
     status: Optional[str] = None
     customer_id: Optional[str] = None
     order_date: Optional[datetime] = None
+    source_quote_id: Optional[str] = None
     notes: Optional[str] = None
 
 
@@ -42,6 +54,7 @@ class SalesOrderResponse(BaseModel):
     status: str
     customer_id: Optional[str]
     order_date: Optional[datetime]
+    source_quote_id: Optional[str]
     notes: Optional[str]
     lines: list[SalesOrderLineResponse] = []
 

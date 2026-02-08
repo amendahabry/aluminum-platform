@@ -1,0 +1,35 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ 'sales.priceLists' | translate }}</h1>
+  </div>
+  <p class="error" *ngIf="error">{{ error | translate }}</p>
+  <div class="loading-state" *ngIf="loading">
+    <span class="spinner"></span>
+    <span>{{ 'app.loading' | translate }}</span>
+  </div>
+  <div class="table-card" *ngIf="!loading && items.length">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{ 'sales.priceListName' | translate }}</th>
+          <th>{{ 'sales.customer' | translate }}</th>
+          <th>{{ 'sales.customerGroup' | translate }}</th>
+          <th>{{ 'sales.validFrom' | translate }}</th>
+          <th>{{ 'sales.validTo' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pl of items">
+          <td>{{ pl.name }}</td>
+          <td>{{ pl.customer_id || '-' }}</td>
+          <td>{{ pl.customer_group || '-' }}</td>
+          <td>{{ pl.valid_from ? (pl.valid_from | date: 'shortDate') : '-' }}</td>
+          <td>{{ pl.valid_to ? (pl.valid_to | date: 'shortDate') : '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="empty-state" *ngIf="!loading && !items.length">
+    <p>{{ 'sales.noPriceLists' | translate }}</p>
+  </div>
+</div>

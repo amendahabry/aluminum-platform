@@ -1,0 +1,33 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ 'production.workOrders' | translate }}</h1>
+  </div>
+  <p class="error" *ngIf="error">{{ error | translate }}</p>
+  <div class="loading-state" *ngIf="loading">
+    <span class="spinner"></span>
+    <span>{{ 'app.loading' | translate }}</span>
+  </div>
+  <div class="table-card" *ngIf="!loading && items.length">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{ 'orders.reference' | translate }}</th>
+          <th>{{ 'orders.status' | translate }}</th>
+          <th>{{ 'production.quantity' | translate }}</th>
+          <th>{{ 'production.dueDate' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let wo of items">
+          <td>{{ wo.reference || wo.id }}</td>
+          <td><span class="badge badge-{{ wo.status }}">{{ wo.status }}</span></td>
+          <td>{{ wo.quantity }}</td>
+          <td>{{ wo.due_date ? (wo.due_date | date: 'shortDate') : '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="empty-state" *ngIf="!loading && !items.length">
+    <p>{{ 'production.noWorkOrders' | translate }}</p>
+  </div>
+</div>

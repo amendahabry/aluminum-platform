@@ -9,6 +9,8 @@ class MaterialCreate(BaseModel):
     description: Optional[str] = None
     unit: str = "pcs"
     weight_kg: Optional[Decimal] = None
+    category: Optional[str] = None
+    cost_per_unit: Optional[Decimal] = None
 
 
 class MaterialUpdate(BaseModel):
@@ -16,6 +18,8 @@ class MaterialUpdate(BaseModel):
     description: Optional[str] = None
     unit: Optional[str] = None
     weight_kg: Optional[Decimal] = None
+    category: Optional[str] = None
+    cost_per_unit: Optional[Decimal] = None
 
 
 class MaterialResponse(BaseModel):
@@ -27,6 +31,8 @@ class MaterialResponse(BaseModel):
     unit: str
     weight_kg: Optional[Decimal]
     is_active: bool
+    category: Optional[str]
+    cost_per_unit: Optional[Decimal]
 
     class Config:
         from_attributes = True

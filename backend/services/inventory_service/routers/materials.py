@@ -59,6 +59,8 @@ def create_material(
         description=body.description,
         unit=body.unit,
         weight_kg=body.weight_kg,
+        category=body.category,
+        cost_per_unit=body.cost_per_unit,
         is_active=True,
     )
     db.add(m)
@@ -87,6 +89,10 @@ def update_material(
         m.unit = body.unit
     if body.weight_kg is not None:
         m.weight_kg = body.weight_kg
+    if body.category is not None:
+        m.category = body.category
+    if body.cost_per_unit is not None:
+        m.cost_per_unit = body.cost_per_unit
     db.commit()
     db.refresh(m)
     return MaterialResponse.model_validate(m)

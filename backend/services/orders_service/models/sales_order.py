@@ -13,6 +13,7 @@ class SalesOrder(Base, TenantMixin, TimestampMixin):
     status = Column(String(32), nullable=False, default="draft", index=True)  # draft, confirmed, shipped, closed
     customer_id = Column(String(36), nullable=True, index=True)
     order_date = Column(DateTime, nullable=True)
+    source_quote_id = Column(String(36), nullable=True, index=True)
     notes = Column(Text, nullable=True)
 
 
