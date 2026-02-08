@@ -1,6 +1,7 @@
 <div class="page-container">
   <div class="page-header">
     <h1>{{ 'logistics.deliveryNotes' | translate }}</h1>
+    <a routerLink="/logistics/delivery-notes/new" class="btn-primary">{{ 'logistics.createDeliveryNote' | translate }}</a>
   </div>
   <p class="error" *ngIf="error">{{ error | translate }}</p>
   <div class="loading-state" *ngIf="loading">
@@ -15,6 +16,7 @@
           <th>{{ 'orders.status' | translate }}</th>
           <th>{{ 'logistics.salesOrder' | translate }}</th>
           <th>{{ 'logistics.deliveredAt' | translate }}</th>
+          <th>{{ 'app.actions' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +25,7 @@
           <td><span class="badge badge-{{ note.status }}">{{ note.status }}</span></td>
           <td>{{ note.sales_order_id || '-' }}</td>
           <td>{{ note.delivered_at ? (note.delivered_at | date: 'short') : '-' }}</td>
+          <td><a [routerLink]="['/logistics/delivery-notes', note.id, 'edit']" class="btn-edit">{{ 'app.edit' | translate }}</a></td>
         </tr>
       </tbody>
     </table>

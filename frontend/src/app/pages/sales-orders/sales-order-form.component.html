@@ -1,0 +1,20 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ id ? ('orders.editSalesOrder' | translate) : ('orders.createSalesOrder' | translate) }}</h1>
+    <a routerLink="/orders/sales-orders" class="btn-back">{{ 'app.back' | translate }}</a>
+  </div>
+  <div class="form-card">
+    <form (ngSubmit)="submit()">
+      <label>{{ 'orders.reference' | translate }}</label>
+      <input type="text" [(ngModel)]="reference" name="reference" placeholder="e.g. SO-001" />
+      <label>{{ 'sales.customer' | translate }} ID</label>
+      <input type="text" [(ngModel)]="customerId" name="customerId" placeholder="Customer UUID (optional)" />
+      <label>{{ 'orders.orderDate' | translate }}</label>
+      <input type="date" [(ngModel)]="orderDate" name="orderDate" />
+      <label>{{ 'inventory.notes' | translate }}</label>
+      <input type="text" [(ngModel)]="notes" name="notes" placeholder="Optional notes" />
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+    </form>
+  </div>
+</div>

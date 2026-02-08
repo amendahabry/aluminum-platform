@@ -1,0 +1,22 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ id ? ('logistics.editPurchaseOrder' | translate) : ('logistics.createPurchaseOrder' | translate) }}</h1>
+    <a routerLink="/logistics/purchase-orders" class="btn-back">{{ 'app.back' | translate }}</a>
+  </div>
+  <div class="form-card">
+    <form (ngSubmit)="submit()">
+      <label>{{ 'logistics.supplier' | translate }}</label>
+      <input type="text" [(ngModel)]="supplierName" name="supplierName" required placeholder="Supplier name" />
+      <label>{{ 'orders.reference' | translate }}</label>
+      <input type="text" [(ngModel)]="reference" name="reference" placeholder="e.g. PO-001" />
+      <label>{{ 'logistics.orderDate' | translate }}</label>
+      <input type="date" [(ngModel)]="orderDate" name="orderDate" />
+      <label>{{ 'logistics.expectedDate' | translate }}</label>
+      <input type="date" [(ngModel)]="expectedDate" name="expectedDate" placeholder="Expected delivery" />
+      <label>{{ 'inventory.notes' | translate }}</label>
+      <input type="text" [(ngModel)]="notes" name="notes" placeholder="Optional notes" />
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+    </form>
+  </div>
+</div>

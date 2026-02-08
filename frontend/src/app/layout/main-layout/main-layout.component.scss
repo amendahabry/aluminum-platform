@@ -1,50 +1,82 @@
 .layout {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
-  width: 260px;
-  background: var(--color-sidebar);
-  color: #f8fafc;
-  padding: 1.5rem;
+  width: 280px;
+  min-width: 280px;
+  background: var(--color-sidebar-solid);
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  color: var(--color-sidebar-text);
+  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+  height: 100vh;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 
   nav {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-    margin-top: 1rem;
+    gap: 0.2rem;
+    margin-top: 1.5rem;
+    overflow-y: auto;
+    min-height: 0;
+    padding-right: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.3);
+      border-radius: var(--radius-full);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.5);
+    }
 
     a {
-      padding: 0.65rem 1rem;
+      padding: 0.75rem 1rem;
       border-radius: var(--radius-md);
-      color: #94a3b8;
+      color: var(--color-sidebar-text-muted);
       text-decoration: none;
       font-weight: 500;
+      font-size: 0.95rem;
       transition: all var(--transition);
 
       &:hover {
         background: var(--color-sidebar-hover);
         color: #fff;
+        transform: translateX(2px);
       }
 
       &.active {
         background: var(--color-sidebar-active);
         color: #fff;
+        border-inline-start: 3px solid var(--color-sidebar-accent);
+        padding-inline-start: calc(1rem - 3px);
       }
     }
   }
 
   .brand {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: 700;
     margin: 0;
     color: #fff;
     letter-spacing: -0.02em;
+    padding: 0.25rem 0;
   }
 
   .sidebar-footer {
@@ -55,7 +87,7 @@
     label {
       display: block;
       font-size: 0.8rem;
-      color: #94a3b8;
+      color: var(--color-sidebar-text-muted);
       margin-bottom: 0.75rem;
       line-height: 1.4;
     }
@@ -66,23 +98,24 @@
       margin-bottom: 0.75rem;
 
       button {
-        padding: 0.35rem 0.65rem;
+        padding: 0.4rem 0.75rem;
         border-radius: var(--radius-sm);
-        background: var(--color-sidebar-hover);
-        color: #94a3b8;
-        border: none;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--color-sidebar-text-muted);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         cursor: pointer;
         font-size: 0.8rem;
         font-weight: 500;
         transition: all var(--transition);
 
         &.active {
-          background: var(--color-sidebar-active);
+          background: var(--color-sidebar-accent);
           color: #fff;
+          border-color: var(--color-sidebar-accent);
         }
 
         &:hover:not(.active) {
-          background: #334155;
+          background: rgba(255, 255, 255, 0.12);
           color: #fff;
         }
       }
@@ -90,10 +123,10 @@
 
     .btn-logout {
       width: 100%;
-      padding: 0.6rem 1rem;
-      background: rgba(239, 68, 68, 0.2);
+      padding: 0.65rem 1rem;
+      background: rgba(239, 68, 68, 0.15);
       color: #fca5a5;
-      border: 1px solid rgba(239, 68, 68, 0.3);
+      border: 1px solid rgba(239, 68, 68, 0.25);
       border-radius: var(--radius-md);
       cursor: pointer;
       font-weight: 500;
@@ -101,7 +134,7 @@
       transition: all var(--transition);
 
       &:hover {
-        background: rgba(239, 68, 68, 0.3);
+        background: rgba(239, 68, 68, 0.25);
         color: #fff;
       }
     }
@@ -110,7 +143,31 @@
 
 .content {
   flex: 1;
-  padding: 1.75rem;
-  background: var(--color-bg);
+  padding: 2rem;
+  background-color: var(--color-bg-solid);
+  background-image:
+    radial-gradient(at 0% 0%, rgba(13, 148, 136, 0.04) 0%, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.03) 0%, transparent 50%);
   overflow-x: hidden;
+  overflow-y: auto;
+  min-width: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+}
+
+.content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: var(--radius-full);
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
 }

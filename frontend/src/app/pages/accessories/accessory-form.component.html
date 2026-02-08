@@ -1,0 +1,28 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ id ? ('inventory.editAccessory' | translate) : ('inventory.createAccessory' | translate) }}</h1>
+    <a routerLink="/inventory/accessories" class="btn-back">{{ 'app.back' | translate }}</a>
+  </div>
+  <div class="form-card">
+    <form (ngSubmit)="submit()">
+      <label>{{ 'inventory.sku' | translate }}</label>
+      <input type="text" [(ngModel)]="sku" name="sku" required [readonly]="!!id" placeholder="e.g. ACC-001" />
+      <label>{{ 'inventory.name' | translate }}</label>
+      <input type="text" [(ngModel)]="name" name="name" required placeholder="Accessory name" />
+      <label>{{ 'inventory.category' | translate }}</label>
+      <input type="text" [(ngModel)]="category" name="category" placeholder="e.g. Hardware, Brackets" />
+      <label>{{ 'inventory.unit' | translate }}</label>
+      <input type="text" [(ngModel)]="unit" name="unit" placeholder="e.g. pcs, m, kg" />
+      <label>{{ 'inventory.cost' | translate }}</label>
+      <input type="number" [(ngModel)]="cost" name="cost" step="0.01" min="0" placeholder="0" />
+      <label>{{ 'inventory.notes' | translate }}</label>
+      <input type="text" [(ngModel)]="notes" name="notes" placeholder="Optional notes" />
+      <label *ngIf="id" class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="isActive" name="isActive" />
+        {{ 'app.active' | translate }}
+      </label>
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+    </form>
+  </div>
+</div>

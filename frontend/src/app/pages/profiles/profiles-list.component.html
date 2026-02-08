@@ -1,6 +1,7 @@
 <div class="page-container">
   <div class="page-header">
     <h1>{{ 'inventory.profiles' | translate }}</h1>
+    <a routerLink="/inventory/profiles/new" class="btn-primary">{{ 'inventory.createProfile' | translate }}</a>
   </div>
   <p class="error" *ngIf="error">{{ error | translate }}</p>
   <div class="loading-state" *ngIf="loading">
@@ -17,6 +18,7 @@
           <th>{{ 'inventory.weightPerMeter' | translate }}</th>
           <th>{{ 'inventory.costPerMeter' | translate }}</th>
           <th>{{ 'app.status' | translate }}</th>
+          <th>{{ 'app.actions' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -27,6 +29,7 @@
           <td>{{ p.weight_per_meter }}</td>
           <td>{{ p.cost_per_meter }}</td>
           <td><span class="badge" [class.badge-success]="p.is_active">{{ p.is_active ? ('app.active' | translate) : ('app.inactive' | translate) }}</span></td>
+          <td><a [routerLink]="['/inventory/profiles', p.id, 'edit']" class="btn-edit">{{ 'app.edit' | translate }}</a></td>
         </tr>
       </tbody>
     </table>

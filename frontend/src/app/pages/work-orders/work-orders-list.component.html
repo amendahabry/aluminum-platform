@@ -1,6 +1,7 @@
 <div class="page-container">
   <div class="page-header">
     <h1>{{ 'production.workOrders' | translate }}</h1>
+    <a routerLink="/production/work-orders/new" class="btn-primary">{{ 'production.createWorkOrder' | translate }}</a>
   </div>
   <p class="error" *ngIf="error">{{ error | translate }}</p>
   <div class="loading-state" *ngIf="loading">
@@ -15,6 +16,7 @@
           <th>{{ 'orders.status' | translate }}</th>
           <th>{{ 'production.quantity' | translate }}</th>
           <th>{{ 'production.dueDate' | translate }}</th>
+          <th>{{ 'app.actions' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +25,7 @@
           <td><span class="badge badge-{{ wo.status }}">{{ wo.status }}</span></td>
           <td>{{ wo.quantity }}</td>
           <td>{{ wo.due_date ? (wo.due_date | date: 'shortDate') : '-' }}</td>
+          <td><a [routerLink]="['/production/work-orders', wo.id, 'edit']" class="btn-edit">{{ 'app.edit' | translate }}</a></td>
         </tr>
       </tbody>
     </table>

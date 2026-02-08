@@ -1,0 +1,28 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ id ? ('inventory.editProfile' | translate) : ('inventory.createProfile' | translate) }}</h1>
+    <a routerLink="/inventory/profiles" class="btn-back">{{ 'app.back' | translate }}</a>
+  </div>
+  <div class="form-card">
+    <form (ngSubmit)="submit()">
+      <label>{{ 'inventory.series' | translate }}</label>
+      <input type="text" [(ngModel)]="series" name="series" required placeholder="e.g. 6063-T5" />
+      <label>{{ 'inventory.alloy' | translate }}</label>
+      <input type="text" [(ngModel)]="alloy" name="alloy" required placeholder="e.g. 6063" />
+      <label>{{ 'inventory.temper' | translate }}</label>
+      <input type="text" [(ngModel)]="temper" name="temper" placeholder="e.g. T5, T6" />
+      <label>{{ 'inventory.weightPerMeter' | translate }}</label>
+      <input type="number" [(ngModel)]="weightPerMeter" name="weightPerMeter" step="0.0001" min="0" placeholder="0" />
+      <label>{{ 'inventory.costPerMeter' | translate }}</label>
+      <input type="number" [(ngModel)]="costPerMeter" name="costPerMeter" step="0.01" min="0" placeholder="0" />
+      <label>{{ 'inventory.description' | translate }}</label>
+      <input type="text" [(ngModel)]="description" name="description" placeholder="Optional description" />
+      <label *ngIf="id" class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="isActive" name="isActive" />
+        {{ 'app.active' | translate }}
+      </label>
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+    </form>
+  </div>
+</div>

@@ -30,7 +30,6 @@ export class LoginComponent {
       tenant_slug: this.tenantSlug || undefined
     }).subscribe({
       next: (res) => {
-        console.log('LOGIN RESPONSE', res);
         this.router.navigate(['/']);
       },
       error: (err) => {

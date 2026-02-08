@@ -1,0 +1,24 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ id ? ('sales.editPriceList' | translate) : ('sales.createPriceList' | translate) }}</h1>
+    <a routerLink="/sales/price-lists" class="btn-back">{{ 'app.back' | translate }}</a>
+  </div>
+  <div class="form-card">
+    <form (ngSubmit)="submit()">
+      <label>{{ 'sales.priceListName' | translate }}</label>
+      <input type="text" [(ngModel)]="name" name="name" required placeholder="Price list name" />
+      <label>{{ 'sales.customer' | translate }} ID</label>
+      <input type="text" [(ngModel)]="customerId" name="customerId" placeholder="Customer UUID (optional)" />
+      <label>{{ 'sales.customerGroup' | translate }}</label>
+      <input type="text" [(ngModel)]="customerGroup" name="customerGroup" placeholder="e.g. Wholesale" />
+      <label>{{ 'sales.validFrom' | translate }}</label>
+      <input type="date" [(ngModel)]="validFrom" name="validFrom" />
+      <label>{{ 'sales.validTo' | translate }}</label>
+      <input type="date" [(ngModel)]="validTo" name="validTo" />
+      <label>{{ 'inventory.notes' | translate }}</label>
+      <input type="text" [(ngModel)]="notes" name="notes" placeholder="Optional notes" />
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+    </form>
+  </div>
+</div>

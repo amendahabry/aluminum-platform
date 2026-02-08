@@ -1,6 +1,7 @@
 <div class="page-container">
   <div class="page-header">
     <h1>{{ 'inventory.accessories' | translate }}</h1>
+    <a routerLink="/inventory/accessories/new" class="btn-primary">{{ 'inventory.createAccessory' | translate }}</a>
   </div>
   <p class="error" *ngIf="error">{{ error | translate }}</p>
   <div class="loading-state" *ngIf="loading">
@@ -17,6 +18,7 @@
           <th>{{ 'inventory.unit' | translate }}</th>
           <th>{{ 'inventory.cost' | translate }}</th>
           <th>{{ 'app.status' | translate }}</th>
+          <th>{{ 'app.actions' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -27,6 +29,7 @@
           <td>{{ a.unit }}</td>
           <td>{{ a.cost || '-' }}</td>
           <td><span class="badge" [class.badge-success]="a.is_active">{{ a.is_active ? ('app.active' | translate) : ('app.inactive' | translate) }}</span></td>
+          <td><a [routerLink]="['/inventory/accessories', a.id, 'edit']" class="btn-edit">{{ 'app.edit' | translate }}</a></td>
         </tr>
       </tbody>
     </table>

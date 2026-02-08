@@ -8,6 +8,7 @@ from sqlalchemy import func
 from shared.auth.deps import require_permission
 from shared.db.session import get_db
 from shared.tenants.middleware import set_tenant_context
+from ..schemas.dashboards import DashboardSummaryResponse
 from services.orders_service.models import Invoice
 from services.inventory_service.models import ScrapRecord
 from services.production_service.models import WorkOrder
@@ -15,7 +16,7 @@ from services.production_service.models import WorkOrder
 router = APIRouter()
 
 
-@router.get("/summary")
+@router.get("/summary", response_model=DashboardSummaryResponse)
 def dashboard_summary(
     tenant_user: Annotated[dict, Depends(require_permission("management:dashboard:read"))],
 ):

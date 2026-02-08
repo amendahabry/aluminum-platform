@@ -1,6 +1,7 @@
 <div class="page-container">
   <div class="page-header">
     <h1>{{ 'orders.salesOrder' | translate }}</h1>
+    <a routerLink="/orders/sales-orders/new" class="btn-primary">{{ 'orders.createSalesOrder' | translate }}</a>
   </div>
   <p class="error" *ngIf="error">{{ error | translate }}</p>
   <div class="loading-state" *ngIf="loading">
@@ -13,7 +14,8 @@
         <tr>
           <th>{{ 'orders.reference' | translate }}</th>
           <th>{{ 'orders.status' | translate }}</th>
-          <th>Order date</th>
+          <th>{{ 'orders.orderDate' | translate }}</th>
+          <th>{{ 'app.actions' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -21,11 +23,12 @@
           <td>{{ o.reference || o.id }}</td>
           <td><span class="badge badge-{{ o.status }}">{{ o.status }}</span></td>
           <td>{{ o.order_date | date:'short' }}</td>
+          <td><a [routerLink]="['/orders/sales-orders', o.id, 'edit']" class="btn-edit">{{ 'app.edit' | translate }}</a></td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="empty-state" *ngIf="!loading && !items.length">
-    <p>No sales orders</p>
+    <p>{{ 'orders.noSalesOrders' | translate }}</p>
   </div>
 </div>

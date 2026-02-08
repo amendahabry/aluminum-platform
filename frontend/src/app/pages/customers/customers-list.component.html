@@ -1,6 +1,7 @@
 <div class="page-container">
   <div class="page-header">
     <h1>{{ 'sales.customers' | translate }}</h1>
+    <a routerLink="/sales/customers/new" class="btn-primary">{{ 'sales.createCustomer' | translate }}</a>
   </div>
   <p class="error" *ngIf="error">{{ error | translate }}</p>
   <div class="loading-state" *ngIf="loading">
@@ -16,6 +17,7 @@
           <th>{{ 'sales.paymentTerms' | translate }}</th>
           <th>{{ 'sales.creditLimit' | translate }}</th>
           <th>{{ 'app.status' | translate }}</th>
+          <th>{{ 'app.actions' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +27,7 @@
           <td>{{ c.payment_terms || '-' }}</td>
           <td>{{ c.credit_limit || '-' }}</td>
           <td><span class="badge" [class.badge-success]="c.is_active">{{ c.is_active ? ('app.active' | translate) : ('app.inactive' | translate) }}</span></td>
+          <td><a [routerLink]="['/sales/customers', c.id, 'edit']" class="btn-edit">{{ 'app.edit' | translate }}</a></td>
         </tr>
       </tbody>
     </table>

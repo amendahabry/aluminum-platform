@@ -1,0 +1,20 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ id ? ('logistics.editDeliveryNote' | translate) : ('logistics.createDeliveryNote' | translate) }}</h1>
+    <a routerLink="/logistics/delivery-notes" class="btn-back">{{ 'app.back' | translate }}</a>
+  </div>
+  <div class="form-card">
+    <form (ngSubmit)="submit()">
+      <label>{{ 'logistics.salesOrder' | translate }} ID</label>
+      <input type="text" [(ngModel)]="salesOrderId" name="salesOrderId" placeholder="Sales order UUID (optional)" />
+      <label>{{ 'orders.reference' | translate }}</label>
+      <input type="text" [(ngModel)]="reference" name="reference" placeholder="e.g. DN-001" />
+      <label>{{ 'logistics.deliveredAt' | translate }}</label>
+      <input type="datetime-local" [(ngModel)]="deliveredAt" name="deliveredAt" />
+      <label>{{ 'inventory.notes' | translate }}</label>
+      <input type="text" [(ngModel)]="notes" name="notes" placeholder="Optional notes" />
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+    </form>
+  </div>
+</div>

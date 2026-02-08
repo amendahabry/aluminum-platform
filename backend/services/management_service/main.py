@@ -54,8 +54,8 @@ def create_app() -> FastAPI:
     app.middleware("http")(auth_middleware)
     app.add_middleware(TenantContextMiddleware)
 
-    app.include_router(dashboards.router, prefix="/dashboards", tags=["dashboards"])
-    app.include_router(reports.router, prefix="/reports", tags=["reports"])
+    app.include_router(dashboards, prefix="/dashboards", tags=["dashboards"])
+    app.include_router(reports, prefix="/reports", tags=["reports"])
 
     @app.get("/health")
     def health():

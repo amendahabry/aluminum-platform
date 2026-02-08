@@ -1,6 +1,7 @@
 <div class="page-container">
   <div class="page-header">
     <h1>{{ 'logistics.purchaseOrders' | translate }}</h1>
+    <a routerLink="/logistics/purchase-orders/new" class="btn-primary">{{ 'logistics.createPurchaseOrder' | translate }}</a>
   </div>
   <p class="error" *ngIf="error">{{ error | translate }}</p>
   <div class="loading-state" *ngIf="loading">
@@ -15,6 +16,7 @@
           <th>{{ 'orders.reference' | translate }}</th>
           <th>{{ 'orders.status' | translate }}</th>
           <th>{{ 'logistics.orderDate' | translate }}</th>
+          <th>{{ 'app.actions' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +25,7 @@
           <td>{{ po.reference || po.id }}</td>
           <td><span class="badge badge-{{ po.status }}">{{ po.status }}</span></td>
           <td>{{ po.order_date | date: 'shortDate' }}</td>
+          <td><a [routerLink]="['/logistics/purchase-orders', po.id, 'edit']" class="btn-edit">{{ 'app.edit' | translate }}</a></td>
         </tr>
       </tbody>
     </table>

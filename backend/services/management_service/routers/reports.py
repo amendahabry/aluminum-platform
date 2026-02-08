@@ -8,13 +8,14 @@ from sqlalchemy import func
 from shared.auth.deps import require_permission
 from shared.db.session import get_db
 from shared.tenants.middleware import set_tenant_context
+from ..schemas.reports import ManagementOverviewResponse
 from services.inventory_service.models import StockLot
 from services.orders_service.models import SalesOrder
 
 router = APIRouter()
 
 
-@router.get("/overview")
+@router.get("/overview", response_model=ManagementOverviewResponse)
 def management_overview(
     tenant_user: Annotated[dict, Depends(require_permission("management:reports:read"))],
 ):

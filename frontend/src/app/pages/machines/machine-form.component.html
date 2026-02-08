@@ -1,0 +1,22 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ id ? ('production.editMachine' | translate) : ('production.createMachine' | translate) }}</h1>
+    <a routerLink="/production/machines" class="btn-back">{{ 'app.back' | translate }}</a>
+  </div>
+  <div class="form-card">
+    <form (ngSubmit)="submit()">
+      <label>{{ 'production.machineName' | translate }}</label>
+      <input type="text" [(ngModel)]="name" name="name" required placeholder="Machine name" />
+      <label>{{ 'production.capacity' | translate }}</label>
+      <input type="number" [(ngModel)]="capacityPerHour" name="capacityPerHour" step="0.01" placeholder="Units per hour" />
+      <label>{{ 'production.constraints' | translate }}</label>
+      <input type="text" [(ngModel)]="constraints" name="constraints" placeholder="e.g. max thickness 5mm" />
+      <label class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="isActive" name="isActive" />
+        {{ 'app.active' | translate }}
+      </label>
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+    </form>
+  </div>
+</div>

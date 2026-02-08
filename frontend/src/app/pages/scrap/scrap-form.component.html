@@ -1,0 +1,26 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ id ? ('inventory.editScrap' | translate) : ('inventory.reportScrap' | translate) }}</h1>
+    <a routerLink="/inventory/scrap" class="btn-back">{{ 'app.back' | translate }}</a>
+  </div>
+  <div class="form-card">
+    <form (ngSubmit)="submit()">
+      <label>{{ 'inventory.material' | translate }} ID</label>
+      <input type="text" [(ngModel)]="materialId" name="materialId" placeholder="Material UUID (optional)" />
+      <label>{{ 'inventory.warehouse' | translate }} ID</label>
+      <input type="text" [(ngModel)]="warehouseId" name="warehouseId" placeholder="Warehouse UUID (optional)" />
+      <label>{{ 'inventory.weightKg' | translate }}</label>
+      <input type="number" [(ngModel)]="weightKg" name="weightKg" step="0.01" required min="0" placeholder="0" />
+      <label>{{ 'inventory.reason' | translate }}</label>
+      <input type="text" [(ngModel)]="reason" name="reason" placeholder="e.g. Defect, cutting waste" />
+      <label>{{ 'inventory.costRecovery' | translate }}</label>
+      <input type="number" [(ngModel)]="costRecovery" name="costRecovery" step="0.01" placeholder="Recovered cost (optional)" />
+      <label>{{ 'inventory.reportedAt' | translate }}</label>
+      <input type="datetime-local" [(ngModel)]="reportedAt" name="reportedAt" />
+      <label>{{ 'inventory.notes' | translate }}</label>
+      <input type="text" [(ngModel)]="notes" name="notes" placeholder="Optional notes" />
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+    </form>
+  </div>
+</div>

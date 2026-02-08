@@ -25,7 +25,12 @@ export class ManagementReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.get<OverviewReport>('/management-reports/overview').subscribe({
-      next: (data) => { this.data = data; this.loading = false; },
+      next: (data) => {
+        const resolved = Array.isArray(data)
+          ? data
+          : ((data as unknown as { content?: OverviewReport[] })?.content ?? []);
+        this.data = resolved[0] || null;
+        this.loading = false; },
       error: (err) => { this.error = err.error?.detail || 'errors.generic'; this.loading = false; }
     });
   }

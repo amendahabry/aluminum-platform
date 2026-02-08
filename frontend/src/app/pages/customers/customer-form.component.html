@@ -1,0 +1,30 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ id ? ('sales.editCustomer' | translate) : ('sales.createCustomer' | translate) }}</h1>
+    <a routerLink="/sales/customers" class="btn-back">{{ 'app.back' | translate }}</a>
+  </div>
+  <div class="form-card">
+    <form (ngSubmit)="submit()">
+      <label>{{ 'sales.customerName' | translate }}</label>
+      <input type="text" [(ngModel)]="name" name="name" required placeholder="Customer name" />
+      <label>{{ 'sales.email' | translate }}</label>
+      <input type="email" [(ngModel)]="email" name="email" placeholder="email@example.com" />
+      <label>{{ 'sales.phone' | translate }}</label>
+      <input type="text" [(ngModel)]="phone" name="phone" placeholder="Phone number" />
+      <label>{{ 'sales.paymentTerms' | translate }}</label>
+      <input type="text" [(ngModel)]="paymentTerms" name="paymentTerms" placeholder="e.g. Net 30" />
+      <label>{{ 'sales.creditLimit' | translate }}</label>
+      <input type="number" [(ngModel)]="creditLimit" name="creditLimit" step="0.01" placeholder="0" />
+      <label>{{ 'sales.billingAddress' | translate }}</label>
+      <textarea [(ngModel)]="billingAddress" name="billingAddress" placeholder="Billing address" rows="2"></textarea>
+      <label>{{ 'sales.shippingAddress' | translate }}</label>
+      <textarea [(ngModel)]="shippingAddress" name="shippingAddress" placeholder="Shipping address" rows="2"></textarea>
+      <label class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="isActive" name="isActive" />
+        {{ 'app.active' | translate }}
+      </label>
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+    </form>
+  </div>
+</div>

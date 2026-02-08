@@ -1,0 +1,20 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>{{ id ? ('production.editWorkOrder' | translate) : ('production.createWorkOrder' | translate) }}</h1>
+    <a routerLink="/production/work-orders" class="btn-back">{{ 'app.back' | translate }}</a>
+  </div>
+  <div class="form-card">
+    <form (ngSubmit)="submit()">
+      <label>BOM ID</label>
+      <input type="text" [(ngModel)]="bomId" name="bomId" placeholder="BOM UUID (optional)" />
+      <label>{{ 'orders.reference' | translate }}</label>
+      <input type="text" [(ngModel)]="reference" name="reference" placeholder="e.g. WO-001" />
+      <label>{{ 'production.quantity' | translate }}</label>
+      <input type="number" [(ngModel)]="quantity" name="quantity" min="1" required />
+      <label>{{ 'production.dueDate' | translate }}</label>
+      <input type="date" [(ngModel)]="dueDate" name="dueDate" />
+      <p class="error" *ngIf="error">{{ error | translate }}</p>
+      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? ('app.loading' | translate) : ('app.save' | translate) }}</button>
+    </form>
+  </div>
+</div>

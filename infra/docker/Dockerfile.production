@@ -6,8 +6,7 @@ ENV PYTHONUNBUFFERED=1
 COPY backend/requirements.txt /app/backend/
 RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 
-COPY backend/shared /app/backend/shared
-COPY backend/services/production_service /app/backend/services/production_service
+COPY backend /app/backend
 
 EXPOSE 8003
 CMD ["uvicorn", "services.production_service.main:app", "--host", "0.0.0.0", "--port", "8003"]

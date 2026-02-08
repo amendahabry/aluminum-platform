@@ -1,6 +1,7 @@
 <div class="page-container">
   <div class="page-header">
     <h1>{{ 'inventory.scrap' | translate }}</h1>
+    <a routerLink="/inventory/scrap/new" class="btn-primary">{{ 'inventory.reportScrap' | translate }}</a>
   </div>
   <p class="error" *ngIf="error">{{ error | translate }}</p>
   <div class="loading-state" *ngIf="loading">
@@ -16,6 +17,7 @@
           <th>{{ 'inventory.weightKg' | translate }}</th>
           <th>{{ 'inventory.reason' | translate }}</th>
           <th>{{ 'inventory.reportedAt' | translate }}</th>
+          <th>{{ 'app.actions' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +27,7 @@
           <td>{{ s.weight_kg }}</td>
           <td>{{ s.reason || '-' }}</td>
           <td>{{ s.reported_at | date: 'short' }}</td>
+          <td><a [routerLink]="['/inventory/scrap', s.id, 'edit']" class="btn-edit">{{ 'app.edit' | translate }}</a></td>
         </tr>
       </tbody>
     </table>

@@ -29,7 +29,12 @@ export class SalesOrdersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.get<SalesOrder[]>('/sales-orders').subscribe({
-      next: (data) => { this.items = data; this.loading = false; },
+      next: (data) => {
+        const resolved = Array.isArray(data)
+          ? data
+          : ((data as unknown as { content?: SalesOrder[] })?.content ?? []);
+        this.items = resolved;
+        this.loading = false; },
       error: (err) => { this.error = err.error?.detail || 'errors.generic'; this.loading = false; }
     });
   }

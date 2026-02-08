@@ -104,6 +104,19 @@
   }
 }
 
+.btn-edit {
+  color: var(--color-primary);
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background var(--transition);
+
+  &:hover {
+    background: var(--color-primary-light);
+  }
+}
+
 .empty-state {
   padding: 2rem;
   text-align: center;

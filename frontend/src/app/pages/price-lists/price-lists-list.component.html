@@ -1,6 +1,7 @@
 <div class="page-container">
   <div class="page-header">
     <h1>{{ 'sales.priceLists' | translate }}</h1>
+    <a routerLink="/sales/price-lists/new" class="btn-primary">{{ 'sales.createPriceList' | translate }}</a>
   </div>
   <p class="error" *ngIf="error">{{ error | translate }}</p>
   <div class="loading-state" *ngIf="loading">
@@ -16,6 +17,7 @@
           <th>{{ 'sales.customerGroup' | translate }}</th>
           <th>{{ 'sales.validFrom' | translate }}</th>
           <th>{{ 'sales.validTo' | translate }}</th>
+          <th>{{ 'app.actions' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +27,7 @@
           <td>{{ pl.customer_group || '-' }}</td>
           <td>{{ pl.valid_from ? (pl.valid_from | date: 'shortDate') : '-' }}</td>
           <td>{{ pl.valid_to ? (pl.valid_to | date: 'shortDate') : '-' }}</td>
+          <td><a [routerLink]="['/sales/price-lists', pl.id, 'edit']" class="btn-edit">{{ 'app.edit' | translate }}</a></td>
         </tr>
       </tbody>
     </table>
